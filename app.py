@@ -117,11 +117,12 @@ st.markdown(
 )
 
 # ──────────────────────────────────────────────
-# GOOGLE SHEETS CONNECTION
+# GOOGLE SHEETS CONNECTION (Dinamis dari Secrets)
 # ──────────────────────────────────────────────
 conn = st.connection("gsheets", type=GSheetsConnection)
 
-SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz0123456789/edit"
+# Otomatis membaca konfigurasi URL spreadsheet asli dari Secrets
+SPREADSHEET_URL = st.secrets["connections"]["gsheets"]["spreadsheet"]
 
 # ──────────────────────────────────────────────
 # READ MASTER DATA
@@ -220,7 +221,8 @@ def show_qr_section():
         unsafe_allow_html=True,
     )
 
-    current_url = "https://your-streamlit-app-url.streamlit.app"
+    # Menggunakan URL asli spreadsheet kamu sebagai payload QR Code
+    current_url = "https://docs.google.com/spreadsheets/d/1HAkMbdIk6rhHLEVRDzIvWfKrsNKzUTG-tzerytoKPYA/edit?hl=id&gid=1337233070#gid=1337233070"
     qr_img = generate_qr_code(current_url)
     st.image(qr_img, caption="QR Code Form Pengambilan ATK", width=250)
 
