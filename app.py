@@ -122,7 +122,7 @@ st.markdown(
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Otomatis membaca konfigurasi URL spreadsheet asli dari Secrets
-SPREADSHEET_URL = st.secrets["connections"]["gsheets"]["spreadsheet"]
+SPREADSHEET_URL = st.secrets["connections"]["gsheets"]["spreadsheet"].strip()
 
 # ──────────────────────────────────────────────
 # READ MASTER DATA
@@ -130,7 +130,12 @@ SPREADSHEET_URL = st.secrets["connections"]["gsheets"]["spreadsheet"]
 #@st.cache_data(ttl=300)
 def load_master_data():
     try:
-        df = conn.read(worksheet="Master Data", spreadsheet=SPREADSHEET_URL)
+        df = conn.read(
+            worksheet="Master Data",
+            spreadsheet=SPREADSHEET_URL,
+            usecols=list(range(5)),  # batasi kolom yang dibaca
+            ttl=300,
+        )
         return df
     except Exception as e:
         st.error(f"Gagal memuat data master: {e}")
@@ -222,7 +227,7 @@ def show_qr_section():
     )
 
     # Menggunakan URL asli spreadsheet kamu sebagai payload QR Code
-    current_url = "https://docs.google.com/spreadsheets/d/1HAkMbdIk6rhHLEVRDzIvWfKrsNKzUTG-tzerytoKPYA/edit?hl=id&gid=1337233070#gid=1337233070"
+    current_url = "https://persediaan-kanim-sukabumi-fdt4geo532o3xht2rctcwd.streamlit.app/"
     qr_img = generate_qr_code(current_url)
     st.image(qr_img, caption="QR Code Form Pengambilan ATK", width=250)
 
