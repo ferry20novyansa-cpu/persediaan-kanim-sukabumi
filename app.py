@@ -102,11 +102,11 @@ def get_items(master_df):
     return []
 
 SECTIONS = [
-    "Tata Usaha",
-    "Intelijen dan Penindakan Keimigrasian",
-    "Izin Tinggal dan Status Keimigrasian",
-    "Pelayanan dan Verifikasi Dokumen Keimigrasian",
-    "Teknologi Informasi dan Komunikasi Keimigrasian",
+    "TATA USAHA",
+    "INTELDAKIM",
+    "INTALTUSKIM",
+    "YANVERDOKJAL",
+    "TIKKIM",
 ]
 
 # ──────────────────────────────────────────────
