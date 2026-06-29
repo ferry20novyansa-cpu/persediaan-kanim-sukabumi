@@ -127,7 +127,7 @@ SPREADSHEET_URL = st.secrets["connections"]["gsheets"]["spreadsheet"]
 # ──────────────────────────────────────────────
 # READ MASTER DATA
 # ──────────────────────────────────────────────
-@st.cache_data(ttl=300)
+#@st.cache_data(ttl=300)
 def load_master_data():
     try:
         df = conn.read(worksheet="Master Data", spreadsheet=SPREADSHEET_URL)
